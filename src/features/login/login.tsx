@@ -26,7 +26,7 @@ const Login = () => {
       const role = decodedToken.role;
 
       if (role === "admin") {
-        navigate("/admin/dashboard");
+        navigate("/admin");
       } else if (role === "customer") {
         navigate("/customer/dashboard");
       }
