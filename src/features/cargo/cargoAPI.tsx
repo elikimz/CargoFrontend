@@ -21,28 +21,28 @@ export const cargoApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllCargo: builder.query({
-      query: () => "/cargo",
+      query: () => "cargo",
     }),
     getCargoById: builder.query({
       query: (id) => `/cargo/${id}`,
     }),
     createCargo: builder.mutation({
       query: (cargoData) => ({
-        url: "/cargo",
+        url: "cargo",
         method: "POST",
         body: cargoData,
       }),
     }),
     updateCargo: builder.mutation({
       query: ({ id, cargoData }) => ({
-        url: `/cargo/${id}`,
+        url: `cargo/${id}`,
         method: "PUT",
         body: cargoData,
       }),
     }),
     deleteCargo: builder.mutation({
       query: (id) => ({
-        url: `/cargo/${id}`,
+        url: `cargo/${id}`,
         method: "DELETE",
       }),
     }),
