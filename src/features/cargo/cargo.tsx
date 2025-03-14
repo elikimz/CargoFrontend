@@ -45,7 +45,7 @@ const CargoManagement: React.FC = () => {
     const interval = setInterval(() => {
       console.log("Refreshing cargo data...");
       refetchCargo();
-    }, 300000);
+    }, 3000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, [refetchCargo]);
