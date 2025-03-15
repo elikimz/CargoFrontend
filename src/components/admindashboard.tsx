@@ -12,6 +12,10 @@ const AdminDashboard: React.FC = () => {
     navigate('/login');
   };
 
+  const handleNavigationClick = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
       {/* Sidebar */}
@@ -27,7 +31,12 @@ const AdminDashboard: React.FC = () => {
             { to: '/admin/notifications', icon: <Bell />, label: 'Notifications' },
             { to: '/admin/profile', icon: <User />, label: 'Profile' }
           ].map((item, index) => (
-            <Link key={index} to={item.to} className="flex items-center space-x-3 p-2 hover:text-green-400">
+            <Link
+              key={index}
+              to={item.to}
+              className="flex items-center space-x-3 p-2 hover:text-green-400"
+              onClick={handleNavigationClick}
+            >
               {item.icon}
               <span className="block md:block">{item.label}</span>
             </Link>
