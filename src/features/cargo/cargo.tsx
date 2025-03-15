@@ -27,8 +27,11 @@ const CargoManagement: React.FC = () => {
     weight: 0,
     receiver_id: 0,
     current_location: "",
-    status: "pending",
+    status: "pending", // Default status
   });
+  const [selectedCargoId, setSelectedCargoId] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   // Fetch all cargo data
   const { data: allCargo, refetch: refetchCargo, isLoading, isError } = useGetAllCargoQuery([]);
@@ -40,7 +43,7 @@ const CargoManagement: React.FC = () => {
     }
   }, [allCargo]);
 
-  // Refresh cargo list every 3 seconds
+  // Refresh cargo list every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       console.log("Refreshing cargo data...");
@@ -66,22 +69,62 @@ const CargoManagement: React.FC = () => {
         current_location: "",
         status: "pending",
       });
+      setErrorMessage("");
+      setSuccessMessage("Cargo created successfully!");
     } catch (error) {
       console.error("Failed to create cargo:", error);
+      setErrorMessage("Failed to create cargo. Please try again.");
     }
   };
 
   // Update an existing cargo entry
   const [updateCargo] = useUpdateCargoMutation();
-  const handleUpdateCargo = async (id: number) => {
+  const handleUpdateCargo = async () => {
+    if (selectedCargoId === null) return;
+
+    // Log the formData to verify all required fields are present
+    console.log("Form data before update:", formData);
+
+    // Check for missing required fields
+    const requiredFields = ["tracking_number", "description", "weight", "receiver_id", "current_location", "status"] as const;
+    const missingFields = requiredFields.filter(field => !formData[field as keyof Cargo]);
+
+    if (missingFields.length > 0) {
+      console.error("Missing required fields:", missingFields);
+      setErrorMessage(`Missing required fields: ${missingFields.join(", ")}`);
+      return;
+    }
+
+    // Ensure correct data types
+    const updatedData = {
+      id: selectedCargoId,
+      tracking_number: formData.tracking_number,
+      description: formData.description,
+      weight: Number(formData.weight), // Ensure weight is a number
+      receiver_id: Number(formData.receiver_id), // Ensure receiver_id is a number
+      current_location: formData.current_location,
+      status: formData.status,
+    };
+
     try {
-      const updatedData = { id, ...formData };
-      console.log("Updating cargo with ID:", id, "and data:", updatedData);
-      await updateCargo(updatedData).unwrap();
+      console.log("Updating cargo with ID:", selectedCargoId, "and data:", updatedData);
+      await updateCargo({ id: selectedCargoId, cargoData: updatedData }).unwrap();
       console.log("Cargo updated successfully");
       refetchCargo();
+      setSelectedCargoId(null);
+      setFormData({
+        tracking_number: "",
+        description: "",
+        weight: 0,
+        receiver_id: 0,
+        current_location: "",
+        status: "pending",
+      });
+      setErrorMessage("");
+      setSuccessMessage("Cargo updated successfully!");
     } catch (error) {
       console.error("Failed to update cargo:", error);
+      setErrorMessage("Failed to update cargo. Please try again.");
     }
   };
 
@@ -95,16 +138,23 @@ const CargoManagement: React.FC = () => {
       refetchCargo();
     } catch (error) {
       console.error("Failed to delete cargo:", error);
+      setErrorMessage("Failed to delete cargo. Please try again.");
     }
   };
 
   // Handle form input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  };
+
+  // Pre-fill form for update
+  const handleEditCargo = (cargo: Cargo) => {
+    setFormData(cargo);
+    setSelectedCargoId(cargo.id!);
   };
 
   // Log loading and error states
@@ -114,12 +164,17 @@ const CargoManagement: React.FC = () => {
     }
     if (isError) {
       console.error("Error loading cargo data");
+      setErrorMessage("Error loading cargo data. Please try again.");
     }
   }, [isLoading, isError]);
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Cargo Management</h1>
+
+      {isLoading && <div className="text-center text-gray-500">Loading...</div>}
+      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+      {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
 
       {/* Form for creating/updating cargo */}
       <form className="mb-6">
@@ -175,21 +230,35 @@ const CargoManagement: React.FC = () => {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Status</label>
-          <input
-            type="text"
+          <select
             name="status"
             value={formData.status}
             onChange={handleInputChange}
             className="w-full px-3 py-2 border rounded"
-          />
+          >
+            <option value="pending">Pending</option>
+            <option value="in transit">In Transit</option>
+            <option value="delivered">Delivered</option>
+          </select>
         </div>
-        <button
-          type="button"
-          onClick={handleCreateCargo}
-          className="px-4 py-2 bg-green-600 text-white rounded"
-        >
-          Create Cargo
-        </button>
+        <div className="flex space-x-2">
+          <button
+            type="button"
+            onClick={handleCreateCargo}
+            className="px-4 py-2 bg-green-600 text-white rounded"
+          >
+            Create Cargo
+          </button>
+          {selectedCargoId !== null && (
+            <button
+              type="button"
+              onClick={handleUpdateCargo}
+              className="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Update Cargo
+            </button>
+          )}
+        </div>
       </form>
 
       {/* List of cargo */}
@@ -217,10 +286,10 @@ const CargoManagement: React.FC = () => {
                 <strong>Status:</strong> {cargo.status}
               </div>
               <button
-                onClick={() => handleUpdateCargo(cargo.id!)}
+                onClick={() => handleEditCargo(cargo)}
                 className="mr-2 text-blue-500"
               >
-                Update
+                Edit
               </button>
               <button
                 onClick={() => handleDeleteCargo(cargo.id!)}

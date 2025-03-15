@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const registerAPI = createApi({
   reducerPath: 'registerAPI',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://cargoapi-bqs3.onrender.com/' 
+    baseUrl: 'https://cargoapi-fjhke5hfbvczgac9.southafricanorth-01.azurewebsites.net/' 
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -14,7 +14,7 @@ export const registerAPI = createApi({
       }),
     }),
     getUsers: builder.query({
-      query: () => '/user', // Fetch all users
+      query: () => 'user', // Fetch all users
     }),
   }),
 });

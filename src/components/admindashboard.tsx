@@ -24,6 +24,7 @@ const AdminDashboard: React.FC = () => {
         <nav className="mt-10 space-y-6">
           {[{ to: '/admin', icon: <Home />, label: 'Dashboard' },
             { to: '/admin/shipments', icon: <Package />, label: 'Shipments' },
+            { to: '/admin/tracking', icon: <Package />, label: 'Tracking' },
             { to: '/admin/notifications', icon: <Bell />, label: 'Notifications' },
             { to: '/admin/profile', icon: <User />, label: 'Profile' }
           ].map((item, index) => (

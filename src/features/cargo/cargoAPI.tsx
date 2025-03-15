@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_URL = "https://cargoapi-bqs3.onrender.com/";
+const API_URL = "https://cargoapi-fjhke5hfbvczgac9.southafricanorth-01.azurewebsites.net/";
 
 export const cargoApi = createApi({
   reducerPath: "cargoApi",
@@ -24,7 +24,7 @@ export const cargoApi = createApi({
       query: () => "cargo",
     }),
     getCargoById: builder.query({
-      query: (id) => `/cargo/${id}`,
+      query: (id) => `cargo/${id}`,
     }),
     createCargo: builder.mutation({
       query: (cargoData) => ({

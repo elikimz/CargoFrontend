@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../login/loginAPI";
-import { Eye, EyeOff } from "lucide-react";
 import { jwtDecode as jwt_decode, JwtPayload } from "jwt-decode";
+import { Eye, EyeOff } from "lucide-react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 

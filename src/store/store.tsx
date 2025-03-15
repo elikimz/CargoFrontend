@@ -3,8 +3,9 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage"; 
 import { loginAPI } from "../features/login/loginAPI";
 import { cargoApi } from "../features/cargo/cargoAPI";
-
+import { trackingApi } from "../features/tracking/trackingAPi";
 import { registerAPI } from "../features/register/registerAPI";
+import { notificationApi } from "../features/notifications/notificationAPI";
 
 // Redux Persist configuration
 const persistConfig = {
@@ -16,7 +17,9 @@ const persistConfig = {
 const rootReducer = combineReducers({
     [loginAPI.reducerPath]:loginAPI.reducer,
     [cargoApi.reducerPath]:cargoApi.reducer,
-    [registerAPI.reducerPath]:registerAPI.reducer
+    [registerAPI.reducerPath]:registerAPI.reducer,
+    [trackingApi.reducerPath]:trackingApi.reducer,
+    [notificationApi.reducerPath]:notificationApi.reducer
    
     // [registerAPI.reducerPath]: registerAPI.reducer,
 });
@@ -32,7 +35,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(loginAPI.middleware ,cargoApi.middleware ,registerAPI.middleware)
+        }).concat(loginAPI.middleware ,cargoApi.middleware ,registerAPI.middleware ,trackingApi.middleware ,notificationApi.middleware)
 });
 
 // Create persistor for Redux Persist
