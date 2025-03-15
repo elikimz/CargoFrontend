@@ -14,6 +14,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.14
         version: 4.0.14(vite@6.2.2(jiti@2.4.2)(lightningcss@1.29.2))
+      emailjs-com:
+        specifier: ^3.2.0
+        version: 3.2.0
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
@@ -784,6 +787,11 @@ packages:
 
   electron-to-chromium@1.5.118:
     resolution: {integrity: sha512-yNDUus0iultYyVoEFLnQeei7LOQkL8wg8GQpkPCRrOlJXlcCwa6eGKZkxQ9ciHsqZyYbj8Jd94X1CTPzGm+uIA==}
+
+  emailjs-com@3.2.0:
+    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
+    engines: {node: '>=12.0.0'}
+    deprecated: The SDK name changed to @emailjs/browser
 
   enhanced-resolve@5.18.1:
     resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
@@ -2040,6 +2048,8 @@ snapshots:
   detect-libc@2.0.3: {}
 
   electron-to-chromium@1.5.118: {}
+
+  emailjs-com@3.2.0: {}
 
   enhanced-resolve@5.18.1:
     dependencies:

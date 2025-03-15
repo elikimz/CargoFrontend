@@ -28,7 +28,7 @@ const Login = () => {
       if (role === "admin") {
         navigate("/admin");
       } else if (role === "customer") {
-        navigate("/customer/dashboard");
+        navigate("/customer");
       }
     }
   }, [navigate]);
@@ -55,7 +55,7 @@ const Login = () => {
       if (role === "admin") {
         navigate("/admin");
       } else if (role === "customer") {
-        navigate("/customer/dashboard");
+        navigate("/customer");
       } else {
         setErrorMessage("Unexpected role value.");
       }
