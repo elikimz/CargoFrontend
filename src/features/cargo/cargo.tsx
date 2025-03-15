@@ -172,7 +172,11 @@ const CargoManagement: React.FC = () => {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Cargo Management</h1>
 
-      {isLoading && <div className="text-center text-gray-500">Loading...</div>}
+      {isLoading && (
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        </div>
+      )}
       {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
       {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
 

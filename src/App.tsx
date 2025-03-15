@@ -4,6 +4,7 @@ import Login from './features/login/login';
 import RegisterPage from './features/register/register';
 import AdminDashboard from './components/admindashboard';
 import TrackingManagement from './features/tracking/tracking';
+import User from './features/users/users';
 // import Dashboard from './components/Dashboard'; // Create this component
 import CargoManagement from './features/cargo/cargo';
 import NotificationManagement from './features/notifications/notification';
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: 'notifications',
         element: <NotificationManagement />,
+      },
+      {
+        path: 'profile',
+        element: <User />,
       },
       {
         path: '',
