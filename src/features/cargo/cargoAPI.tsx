@@ -17,7 +17,8 @@ export const cargoApi = createApi({
       }
       return headers;
     },
-    credentials: "include", // Ensures cookies and tokens are sent
+    credentials: "include",
+   
   }),
   endpoints: (builder) => ({
     getAllCargo: builder.query({
