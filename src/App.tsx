@@ -78,6 +78,7 @@ import Tracking from './pages/tracking';
 import About from './pages/About';
 import ServicesPage from './pages/services';
 import ContactPage from './pages/contact';
+import NotificationsPage from './pages/notifications';
 
 
 
@@ -147,7 +148,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'notifications',
-        element: <NotificationManagement />, // Show customer notifications
+        element: <NotificationsPage />, // Show customer notifications
       },
       {
         path: 'profile',
