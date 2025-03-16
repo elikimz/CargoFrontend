@@ -18,7 +18,7 @@ const Home = () => {
             Reliable, efficient, and real-time cargo tracking for your business.
           </p>
           <Link
-            to="/tracking"
+            to="/login"
             className="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-full text-lg font-semibold"
           >
             Track Your Shipment

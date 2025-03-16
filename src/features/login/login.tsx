@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useLoginUserMutation } from "../login/loginAPI";
 import { jwtDecode as jwt_decode, JwtPayload } from "jwt-decode";
 import { Eye, EyeOff } from "lucide-react";
@@ -127,6 +127,14 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <div className="text-center mt-4">
+            <p>
+              Don't have an account?{" "}
+              <Link to="/register" className="text-green-600 hover:underline">
+                Register
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
       <Footer />
