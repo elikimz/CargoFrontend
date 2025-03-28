@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const loginAPI = createApi({
   reducerPath: "loginAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://cargoapi-fjhke5hfbvczgac9.southafricanorth-01.azurewebsites.net/",
+    baseUrl: "https://cargoapi-bqs3.onrender.com/",
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({

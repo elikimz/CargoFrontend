@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_URL = "https://cargoapi-fjhke5hfbvczgac9.southafricanorth-01.azurewebsites.net/";
+const API_URL = "https://cargoapi-bqs3.onrender.com/";
 
 export const trackingApi = createApi({
   reducerPath: "trackingApi",
